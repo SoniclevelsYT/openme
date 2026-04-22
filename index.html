@@ -2,54 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Video Full Screen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencia de Video</title>
     <style>
-        /* Eliminamos cualquier margen nativo del navegador */
+        /* Eliminamos márgenes para que el video toque los bordes */
         body, html { 
             margin: 0; 
             padding: 0; 
             height: 100%; 
             width: 100%;
-            overflow: hidden; /* Esto quita las barras de desplazamiento */
-            background-color: #000;
+            background-color: #000; 
+            overflow: hidden; 
         }
 
+        /* Capa inicial con el botón */
         #capa-inicio {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
             height: 100%;
-            background: #000;
-            display: flex;
+            background: #000; 
+            display: flex; 
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; 
+            align-items: center; 
             z-index: 100;
-            color: white;
+            color: white; 
             font-family: sans-serif;
         }
 
         #btn-verde {
-            padding: 20px 40px;
+            padding: 20px 40px; 
             font-size: 20px;
-            background-color: green;
+            background-color: green; 
             color: white;
-            border: none;
-            cursor: pointer;
+            border: none; 
+            cursor: pointer; 
             border-radius: 10px;
-            margin-top: 20px;
         }
 
-        /* Esta es la clave para ocupar toda la pantalla */
+        /* El video configurado para pantalla completa */
         #video-principal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;   /* 100% del ancho de la vista */
-            height: 100vh;  /* 100% de la altura de la vista */
-            object-fit: cover; /* Ajusta el video para llenar el área */
-            display: none;     /* Oculto hasta pulsar el botón */
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh;
+            /* 'cover' hará que el video llene toda la pantalla una vez lo recortes */
+            object-fit: cover; 
+            display: none; 
         }
     </style>
 </head>
@@ -69,34 +71,11 @@
             var capa = document.getElementById("capa-inicio");
             var video = document.getElementById("video-principal");
             
+            // Ocultamos el botón y mostramos el video
             capa.style.display = "none";
             video.style.display = "block";
             
-            video.muted = false;
-            video.play();
-        }
-    </script>
-</body>
-</html>    <div id="capa-inicio">
-        <h1>Por favor, pulsa el botón verde</h1>
-        <button id="btn-verde" onclick="iniciarExperiencia()">Reproducir</button>
-    </div>
-
-    <div id="contenedor-video">
-        <video id="video-principal" loop playsinline>
-            <source src="video.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <script>
-        function iniciarExperiencia() {
-            var contenedor = document.getElementById("contenedor-video");
-            var capa = document.getElementById("capa-inicio");
-            var video = document.getElementById("video-principal");
-            
-            capa.style.display = "none";
-            contenedor.style.display = "block";
-            
+            // Activamos sonido y reproducimos
             video.muted = false;
             video.play();
         }
