@@ -2,29 +2,18 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Video Pro</title>
+    <title>Mi Video</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        body, html { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
         
-        /* El video de fondo */
-        #fondo-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        /* La capa del botón */
+        /* Capa que contiene el botón */
         #capa-inicio {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: #000; /* Fondo negro sólido para ocultar todo */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -44,26 +33,45 @@
             border-radius: 10px;
             margin-top: 20px;
         }
+
+        /* Estilo del video, oculto por defecto */
+        #contenedor-video {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
 
     <div id="capa-inicio">
         <h1>Por favor, pulsa el botón verde</h1>
-        <button id="btn-verde" onclick="iniciarVideo()">Reproducir</button>
+        <button id="btn-verde" onclick="iniciarExperiencia()">Reproducir</button>
     </div>
 
-    <video id="video-principal" loop playsinline>
-        <source src="video.mp4" type="video/mp4">
-    </video>
+    <div id="contenedor-video">
+        <video id="video-principal" loop playsinline>
+            <source src="video.mp4" type="video/mp4">
+        </video>
+    </div>
 
     <script>
-        function iniciarVideo() {
-            var video = document.getElementById("video-principal");
+        function iniciarExperiencia() {
+            var contenedor = document.getElementById("contenedor-video");
             var capa = document.getElementById("capa-inicio");
+            var video = document.getElementById("video-principal");
             
-            // Ocultamos el mensaje
+            // Ocultamos la capa inicial
             capa.style.display = "none";
+            
+            // Mostramos el contenedor del video
+            contenedor.style.display = "block";
             
             // Reproducimos con sonido
             video.muted = false;
