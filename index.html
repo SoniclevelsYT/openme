@@ -2,32 +2,73 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Video</title>
+    <title>Video Pro</title>
     <style>
-      
-        body { 
-            margin: 0; 
-            padding: 0; 
-            background-color: #000; 
-            overflow: hidden; 
-        }
-   
-        video { 
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        
+        /* El video de fondo */
+        #fondo-video {
             position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%; 
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* La capa del botón */
+        #capa-inicio {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        #btn-verde {
+            padding: 20px 40px;
+            font-size: 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <video autoplay loop playsinline>
+    <div id="capa-inicio">
+        <h1>Por favor, pulsa el botón verde</h1>
+        <button id="btn-verde" onclick="iniciarVideo()">Reproducir</button>
+    </div>
+
+    <video id="video-principal" loop playsinline>
         <source src="video.mp4" type="video/mp4">
     </video>
 
+    <script>
+        function iniciarVideo() {
+            var video = document.getElementById("video-principal");
+            var capa = document.getElementById("capa-inicio");
+            
+            // Ocultamos el mensaje
+            capa.style.display = "none";
+            
+            // Reproducimos con sonido
+            video.muted = false;
+            video.play();
+        }
+    </script>
 </body>
 </html>
