@@ -2,17 +2,18 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mi Video</title>
+    <title>Video Full Screen</title>
     <style>
+        /* Eliminamos cualquier margen nativo del navegador */
         body, html { 
             margin: 0; 
             padding: 0; 
             height: 100%; 
-            background: #000; 
-            overflow: hidden; 
+            width: 100%;
+            overflow: hidden; /* Esto quita las barras de desplazamiento */
+            background-color: #000;
         }
-        
-        /* Capa de inicio */
+
         #capa-inicio {
             position: fixed;
             top: 0;
@@ -24,7 +25,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10;
+            z-index: 100;
             color: white;
             font-family: sans-serif;
         }
@@ -40,25 +41,43 @@
             margin-top: 20px;
         }
 
-        /* Contenedor del video */
-        #contenedor-video {
-            display: none;
-            width: 100%;
-            height: 100%;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            /* 'contain' asegura que se vea todo el video sin recortes */
-            object-fit: contain; 
-            background-color: #000;
+        /* Esta es la clave para ocupar toda la pantalla */
+        #video-principal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;   /* 100% del ancho de la vista */
+            height: 100vh;  /* 100% de la altura de la vista */
+            object-fit: cover; /* Ajusta el video para llenar el área */
+            display: none;     /* Oculto hasta pulsar el botón */
         }
     </style>
 </head>
 <body>
 
     <div id="capa-inicio">
+        <h1>Por favor, pulsa el botón verde</h1>
+        <button id="btn-verde" onclick="iniciarExperiencia()">Reproducir</button>
+    </div>
+
+    <video id="video-principal" loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <script>
+        function iniciarExperiencia() {
+            var capa = document.getElementById("capa-inicio");
+            var video = document.getElementById("video-principal");
+            
+            capa.style.display = "none";
+            video.style.display = "block";
+            
+            video.muted = false;
+            video.play();
+        }
+    </script>
+</body>
+</html>    <div id="capa-inicio">
         <h1>Por favor, pulsa el botón verde</h1>
         <button id="btn-verde" onclick="iniciarExperiencia()">Reproducir</button>
     </div>
